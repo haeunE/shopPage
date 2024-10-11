@@ -13,32 +13,57 @@
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Shop</a>
+    <a class="navbar-brand" href="#">SHOP</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Home</a>
+          <a class="nav-link active" aria-current="page" href="/">HOME</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Sign up</a>
+          <a class="nav-link" href="/auth/new-products">NEW</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#">Log in</a>
+          <a class="nav-link" href="/auth/signup">BEST</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
+        <li class="nav-item">
+          <a class="nav-link" href="/auth/signup">SHOP</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/auth/signup">SALE</a>
+        </li>
+        <c:if test = "${sessionScope.principal == null}">
+	        <li class="nav-item dropdown">
+	          <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	            회원
+	          </a>
+	          <ul class="dropdown-menu">
+		        <li class="nav-item">
+		          <a class="nav-link" href="/auth/signup">Sign up</a>
+		        </li>
+		        <li class="nav-item">
+		          <a class="nav-link" href="/auth/login">Log in</a>
+		        </li>
+		       </ul>
+		    </li>
+        </c:if>
+	    <c:if test = "${sessionScope.principal != null}">
+	    	<li class="nav-item dropdown">
+	          <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	            ${sessionScope.principal.userid.toUpperCase()}님
+	          </a>
+	          <ul class="dropdown-menu">
+		        <li class="nav-item">
+		          <a class="nav-link" href="/auth/userinfo">Information</a>
+		        </li>
+		        <li class="nav-item">
+		          <a class="nav-link" href="/auth/logout">Log out</a>
+		        </li>
+		       </ul>
+		    </li>
+	    </c:if>
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

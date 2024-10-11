@@ -1,7 +1,5 @@
 package com.example.shop.domain;
 
-
-
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -21,29 +19,22 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="users")
-public class User {
-	
+@Table(name="products")
+public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(length = 50, nullable = false, unique = true)
-	private String userid;
+	@Column(length=200, nullable = false, unique=true)
+	private String productName;
 	
-	@Column(length = 100, nullable = false)
-	private String password;
+	@Column(columnDefinition = "TEXT")
+	private String content;
 	
-	private String email;
+	@Column(length = 500)
+	private String productPicture;
 	
 	@CreationTimestamp
 	private Timestamp createDate;
-	
-//	private String username;
-//	
-//	private String usernum;
-//	
-
-//	
-//	private String address;
 }
+ 
