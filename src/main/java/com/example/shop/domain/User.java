@@ -39,11 +39,9 @@ public class User {
 	@CreationTimestamp
 	private Timestamp createDate;
 	
-//	private String username;
-//	
-//	private String usernum;
-//	
-
-//	
-//	private String address;
+	private String username;
+	
+	private String usernum;
+	
+	private String address;
 }

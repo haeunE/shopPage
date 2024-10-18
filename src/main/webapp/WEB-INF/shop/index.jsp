@@ -10,10 +10,10 @@
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
   </div>
   <div class="carousel-inner">
-    <div class="carousel-item active">
+    <div class="carousel-item active" data-bs-interval="1000">
       <img src="/img/캐러셀1.jfif" class="d-block w-100 " alt="...">
     </div>
-    <div class="carousel-item">
+    <div class="carousel-item" data-bs-interval="10000">
       <img src="/img/캐러셀2.jfif" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
