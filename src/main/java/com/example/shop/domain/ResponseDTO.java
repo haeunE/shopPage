@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class ResponseDTO<T> {
 	// 응답결과 상태 코드
 	private int status;
