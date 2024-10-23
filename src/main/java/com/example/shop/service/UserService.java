@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.shop.domain.User;
 import com.example.shop.repository.UserRepository;
+import com.example.shop.roletype.Roletype;
 
 @Service
 public class UserService {
@@ -23,6 +24,7 @@ public class UserService {
 	}
 	
 	public void insertUser(User user) {
+		user.setUser(Roletype.MEMBER);
 		userRepository.save(user);
 	}
 	
