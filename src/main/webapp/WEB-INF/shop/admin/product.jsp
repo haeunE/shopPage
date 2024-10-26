@@ -13,7 +13,7 @@
 		    <!-- 사이드바 메뉴목록1 -->
 		    <ul class="list-group">
 		      <li class="list-group-item"><a href="#">회원관리</a></li>
-		      <li class="list-group-item"><a href="/admin">게시물관리</a></li>
+		      <li class="list-group-item"><a href="/admin/product">게시물관리</a></li>
 		      <li class="list-group-item"><a href="#">주문관리</a></li>
 		    </ul>
 		</div>
