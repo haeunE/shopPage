@@ -46,17 +46,10 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private Roletype user;
 	
-<<<<<<< Updated upstream
+
 //	private String username;
 //	
 //	private String usernum;
 //	
 //	private String address;
-=======
-	private String usernum;
-	
-	private String address;
-	
-	private Role
->>>>>>> Stashed changes
 }
