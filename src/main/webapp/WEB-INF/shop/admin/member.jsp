@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file ="../layout/header.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <div class='row'>
 	<div class="col-md-3 col-sm-3">
 	<!-- 사이드 바 메뉴-->
@@ -28,13 +29,13 @@
 		</div>
 	</div>
 </div>
-<div>
-	<ul class="list-group">
-	  <li class="list-group-item">
-	    <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckboxStretched">
-	    <label class="form-check-label stretched-link" for="firstCheckboxStretched"><a>${mebers }</a></label>
-	  </li>
-	</ul>
+<div class="list-group">
+	<c:forEach items="${members}" var="member">
+		<label class="list-group-item">
+    		<input class="form-check-input me-1" type="checkbox" value="">
+    		ID : ${member.id} || ${fn:toUpperCase(member.userid)} (${member.email})
+    	</label>
+	</c:forEach>
 </div>
 
 <%@ include file ="../layout/footer.jsp" %>

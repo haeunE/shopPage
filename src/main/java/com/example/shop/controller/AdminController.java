@@ -1,6 +1,8 @@
 package com.example.shop.controller;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,8 +35,18 @@ public class AdminController {
 	@GetMapping("/admin/member")
 //	@ResponseBody
 	public String member(Model model) {
-		System.out.println(userRepository.findByUser(Roletype.MEMBER));
-		List<User> members = userRepository.findByUser(Roletype.MEMBER);
+//		System.out.println(userRepository.findByUser(Roletype.MEMBER));
+		List<User> getlist = userRepository.findByUser(Roletype.MEMBER);
+		List<Map<?, ?>> members  = new ArrayList();
+		for(User u :getlist) {
+			Map<String,String> member= new HashMap<>();
+			member.put("id", String.valueOf(u.getId()));
+			member.put("userid", u.getUserid());
+			member.put("password", u.getPassword());
+			member.put("email", u.getEmail());
+			member.put("createDate", String.valueOf(u.getCreateDate()));
+			members.add(member);
+		}
 		model.addAttribute("members",members);
 		return "/admin/member";
 	}
