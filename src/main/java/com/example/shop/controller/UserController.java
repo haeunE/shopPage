@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.saml2.Saml2RelyingPartyProperties.Decryption;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,11 +42,11 @@ public class UserController {
 	
 	@PostMapping("/auth/signup")
 	@ResponseBody
-	public ResponseDTO<?> signUp (@RequestBody User user){
+	public ResponseDTO<?> signUp (@RequestBody User user) throws Exception{
 		//중복검사
 		User findUser = userService.getUser(user.getUserid());
 		if (findUser.getUserid() == null) {
-			userService.insertUser(user);
+			userService.insertUser(user, user.getPassword().getBytes());
 			return new ResponseDTO<>(HttpStatus.OK.value(),user.getUserid()+"님 가입 완료");
 		}else {
 			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(),user.getUserid()+"은 중복된 아이디 입니다.");

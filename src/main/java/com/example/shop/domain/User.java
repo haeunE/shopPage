@@ -19,6 +19,7 @@ import com.example.shop.roletype.Roletype;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -26,6 +27,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name="users")
+@EqualsAndHashCode
 public class User {
 	
 	@Id
@@ -46,6 +48,7 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private Roletype user;
 	
+	private String SALT;
 
 //	private String username;
 //	
