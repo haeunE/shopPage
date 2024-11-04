@@ -4,6 +4,7 @@ import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class UserService {
 	private static final int SALT_SIZE=16;
 	
 	// 동일 아이디 존재 확인
-	public User getUser(String userid) {
+	public User getUserid(String userid) {
 		User findUser = userRepository.findByUserid(userid).orElseGet(()->{
 			return new User();
 		});
@@ -35,10 +36,31 @@ public class UserService {
 		user.setUser(Roletype.MEMBER);
 		userRepository.save(user);
 	}
+	// 아이디 비번 체크
+	public boolean cheaking(String userid, String hashing_pass) {
+		User user = userRepository.findByUserid(userid).get();
+		String getPass = user.getPassword();
+		if (getPass.equals(hashing_pass)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean get_User(String userid,String salt, byte[] password) throws Exception{
+		String pass = Hashing(password, salt);
+		if (cheaking(userid, pass)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 	
 	// 계정 수정하기
-	public User modifyUser(User oldInfo, User newInfo) {
-		oldInfo.setPassword(newInfo.getPassword());
+	public User modifyUser(User oldInfo, User newInfo) throws Exception{
+		String SALT = getSALT();
+		oldInfo.setPassword(Hashing(newInfo.getPassword().getBytes(),SALT));
+		oldInfo.setSALT(SALT);
 		oldInfo.setEmail(newInfo.getEmail());
 		System.out.println(oldInfo);
 		return oldInfo;

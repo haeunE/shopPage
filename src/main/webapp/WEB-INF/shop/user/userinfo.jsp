@@ -9,7 +9,7 @@
 
 <div class="input-group mb-3">
   <span class="input-group-text" id="basic-addon1">비밀번호</span>
-  <input id="password" type="password" class="form-control" value="${userInfo.password}" placeholder="Password" aria-label="password" aria-describedby="basic-addon1" >
+  <input id="password" type="password" class="form-control"  placeholder="Password" aria-label="password" aria-describedby="basic-addon1" >
 </div>
 
 <div class="input-group mb-3">

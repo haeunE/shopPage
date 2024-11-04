@@ -44,7 +44,7 @@ public class UserController {
 	@ResponseBody
 	public ResponseDTO<?> signUp (@RequestBody User user) throws Exception{
 		//중복검사
-		User findUser = userService.getUser(user.getUserid());
+		User findUser = userService.getUserid(user.getUserid());
 		if (findUser.getUserid() == null) {
 			userService.insertUser(user, user.getPassword().getBytes());
 			return new ResponseDTO<>(HttpStatus.OK.value(),user.getUserid()+"님 가입 완료");
@@ -61,12 +61,13 @@ public class UserController {
 	
 	@PostMapping("/auth/login")
 	@ResponseBody
-	public ResponseDTO<?> login(@RequestBody User user, HttpSession session) {
-		User findUser = userService.getUser(user.getUserid());
+	public ResponseDTO<?> login(@RequestBody User user, HttpSession session) throws Exception{
+		User findUser = userService.getUserid(user.getUserid());
+		System.out.println(findUser);
 		if(findUser.getUserid() == null) {
 			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(),"해당 아이디가 없습니다.");
 		}else {
-			if(findUser.getPassword().equals(user.getPassword())) {
+			if(userService.get_User(findUser.getUserid(), findUser.getSALT(), user.getPassword().getBytes())) {
 				Map<String,String> userSession = userService.userSession(findUser);
 				session.setAttribute("principal", userSession);
 				return new ResponseDTO<>(HttpStatus.OK.value(),user.getUserid()+"님 로그인 완료");
@@ -87,21 +88,34 @@ public class UserController {
 		Map<String, String> user = (Map<String, String>) session.getAttribute("principal");
 		int id = Integer.parseInt(user.get("id"));
 		User userInfo = userRepository.findById(id).get();
-		model.addAttribute("userInfo",userInfo);
-		
+		Map<String,String> userSession = userService.userSession(userInfo);
+		model.addAttribute("userInfo",userSession);
+		System.out.println(userSession);
 		return "user/userinfo";
 	}
 	
 	@PostMapping("/auth/userinfo")
 	@ResponseBody
-	public ResponseDTO<?> modifyUser(@RequestBody User user, HttpSession session) {
+	public ResponseDTO<?> modifyUser(@RequestBody User user, HttpSession session) throws Exception{
 		//회원정보변경
-		User findUser = userService.getUser(user.getUserid());
+		System.out.println(user);
+		User findUser = userService.getUserid(user.getUserid());
+		if (user.getPassword()=="") {
+			if (user.getEmail()=="@") {
+				return new ResponseDTO<>(HttpStatus.OK.value(),"비밀번호나 이메일을 입력하지 않아 정보 수정이 취소되었습니다.");
+			}else {
+				System.out.println("user : "+user.getEmail());
+				findUser.setEmail(user.getEmail());
+				System.out.println("findUser : "+findUser);
+				return new ResponseDTO<>(HttpStatus.OK.value(),"회원 이메일 수정 완료");
+				}
+		}
 		User newInfo = userService.modifyUser(findUser, user);
 		userRepository.save(newInfo);
 		//세션변경
 		Map<String,String> userSession = userService.userSession(newInfo);
 		session.setAttribute("principal", userSession);
+		System.out.println(userSession);
 		
 		return new ResponseDTO<>(HttpStatus.OK.value(),"회원 정보 수정 완료");
 	}
