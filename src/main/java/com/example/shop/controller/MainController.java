@@ -24,4 +24,9 @@ public class MainController {
 		return "index";
 	}
 	
+	@GetMapping("/error-page")
+	public String error() {
+		return "errorpage";
+	}
+	
 }

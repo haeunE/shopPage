@@ -27,6 +27,7 @@ public class AdminController {
 	@Autowired
 	private UserRepository userRepository;
 	
+	
 	@GetMapping("/admin/product")
 	public String product() {
 		return "/admin/product";

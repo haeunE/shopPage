@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.example.shop.domain.ResponseDTO;
 import com.example.shop.domain.User;
 import com.example.shop.repository.UserRepository;
+import com.example.shop.roletype.Roletype;
 import com.example.shop.service.UserService;
 import org.springframework.web.bind.annotation.RequestParam;
 
