@@ -37,15 +37,16 @@ dependencies {
 	// https://mvnrepository.com/artifact/javax.servlet/jstl
 	implementation group: 'javax.servlet', name: 'jstl'
 	
-	//<Spring Security(4개)
-	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-web
-	//implementation group: 'org.springframework.security', name: 'spring-security-web'
-	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-config
-	//implementation group: 'org.springframework.security', name: 'spring-security-config'
-	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-core
-	//implementation group: 'org.springframework.security', name: 'spring-security-core'
+	//spring boot security(2개)
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security'
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test
+	testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test'
 	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs
 	implementation group: 'org.springframework.security', name: 'spring-security-taglibs'
+
+	
+	
 	
 	
 	
